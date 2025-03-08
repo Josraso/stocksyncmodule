@@ -1,0 +1,21 @@
+CREATE TABLE IF NOT EXISTS `PREFIX_stock_sync_references` (
+  `id_reference_map` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `reference` varchar(64) NOT NULL,
+  `id_product_source` int(10) unsigned NOT NULL,
+  `id_product_attribute_source` int(10) unsigned NOT NULL DEFAULT 0,
+  `id_product_target` int(10) unsigned NOT NULL,
+  `id_product_attribute_target` int(10) unsigned NOT NULL DEFAULT 0,
+  `id_store_source` int(10) unsigned NOT NULL,
+  `id_store_target` int(10) unsigned NOT NULL,
+  `active` tinyint(1) unsigned NOT NULL DEFAULT 1,
+  `last_sync` datetime DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id_reference_map`),
+  UNIQUE KEY `unique_mapping` (`reference`, `id_store_source`, `id_store_target`),
+  KEY `reference` (`reference`),
+  KEY `active` (`active`),
+  KEY `source_product` (`id_product_source`, `id_product_attribute_source`),
+  KEY `target_product` (`id_product_target`, `id_product_attribute_target`),
+  KEY `stores` (`id_store_source`, `id_store_target`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

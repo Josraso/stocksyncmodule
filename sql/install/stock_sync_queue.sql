@@ -1,0 +1,21 @@
+CREATE TABLE IF NOT EXISTS `PREFIX_stock_sync_queue` (
+  `id_queue` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id_product` int(10) unsigned NOT NULL,
+  `id_product_attribute` int(10) unsigned NOT NULL DEFAULT 0,
+  `reference` varchar(64) NOT NULL,
+  `old_quantity` decimal(20,6) NOT NULL DEFAULT 0,
+  `new_quantity` decimal(20,6) NOT NULL DEFAULT 0,
+  `operation_type` varchar(32) NOT NULL,
+  `status` varchar(32) NOT NULL,
+  `source_store_id` int(10) unsigned NOT NULL,
+  `target_store_id` int(10) unsigned NOT NULL,
+  `attempts` int(10) unsigned NOT NULL DEFAULT 0,
+  `error_message` text DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id_queue`),
+  KEY `reference` (`reference`),
+  KEY `status` (`status`),
+  KEY `source_target` (`source_store_id`, `target_store_id`),
+  KEY `product` (`id_product`, `id_product_attribute`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
