@@ -1,0 +1,1 @@
+<?php\n\nheader("Pragma: no-cache");\nheader("Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0");\nheader("Expires: 0");\nheader("Location: ../");\nexit;\n
